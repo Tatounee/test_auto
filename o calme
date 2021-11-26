@@ -58,3 +58,22 @@ let range m n =
   in range_rec m n []
     
 let _ = range 6 3 
+
+
+------------------------------------------------------------------------
+
+let rec map f l = match l with 
+  | [] -> []
+  | hd :: tl -> f hd :: map f tl
+                  
+let rec filter f l = match l with 
+  | [] -> []
+  | hd :: tl -> if f hd then hd :: filter f tl else filter f tl
+          
+let rec rev l = 
+  let rec rev_rec l l' = 
+    match l with
+    | [] -> l'
+    | hd :: tl -> rev_rec tl (hd :: l')
+  in rev_rec l []
+    
