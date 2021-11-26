@@ -1,0 +1,6 @@
+let rec ack m n = match (m, n) with
+  | (0, n) -> n + 1
+  | (m, 0) -> if m > 0 then ack (m - 1) 1 else failwith "m should be greater than 0" 
+  | (m, n) -> if m > 0 && n > 0 then ack (m - 1) (ack m (n - 1)) else failwith "m and n should be greater than 0" 
+    
+    
