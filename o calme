@@ -42,3 +42,19 @@ let rec nth l k =
     | hd :: tl -> if k = idx then hd else nth_rec tl k (idx + 1)
   in nth_rec l k 0
     
+                                       
+type ordering = Greater | Equal | Less  
+let cmp x y = if x > y
+  then Greater
+  else if x = y 
+  then Equal
+  else Less
+
+let range m n = 
+  let rec range_rec m n l = match cmp m n with
+    | Greater -> range_rec m (n + 1) (n :: l)
+    | Equal -> n :: l
+    | Less ->range_rec m (n - 1) (n :: l)
+  in range_rec m n []
+    
+let _ = range 6 3 
