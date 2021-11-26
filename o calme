@@ -35,3 +35,10 @@ let average l =
   in match l with 
   | [] -> failwith "try to calcul the mean of an empty list"
   | _  -> average_rec l 0 0
+
+let rec nth l k = 
+  let rec nth_rec l k idx = match l with
+    | [] -> failwith "k is greater than the len of the list"
+    | hd :: tl -> if k = idx then hd else nth_rec tl k (idx + 1)
+  in nth_rec l k 0
+    
