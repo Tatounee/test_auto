@@ -28,3 +28,10 @@ let rec is_sorted l = match l with
   | [ _ ] -> true
   | x :: x' :: tl -> and' (x <= x') (is_sorted (x' :: tl))
                        
+let average l = 
+  let rec average_rec l acc len = match l with
+    | [] -> acc / len
+    | hd :: tl -> average_rec tl (acc + hd) (len + 1)
+  in match l with 
+  | [] -> failwith "try to calcul the mean of an empty list"
+  | _  -> average_rec l 0 0
