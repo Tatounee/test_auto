@@ -4,3 +4,8 @@ let rec ack m n = match (m, n) with
   | (m, n) -> if m > 0 && n > 0 then ack (m - 1) (ack m (n - 1)) else failwith "m and n should be greater than 0" 
     
     
+external or': bool -> bool -> bool = "%sequor"
+let rec mem x l = match l with 
+  | [] -> false
+  | hd :: tl -> or' (x = hd) (mem x tl)
+    
