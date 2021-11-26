@@ -1,11 +1,30 @@
+
+external or': bool -> bool -> bool = "%sequor"
+external and': bool -> bool -> bool = "%sequand"
+
+
 let rec ack m n = match (m, n) with
   | (0, n) -> n + 1
   | (m, 0) -> if m > 0 then ack (m - 1) 1 else failwith "m should be greater than 0" 
   | (m, n) -> if m > 0 && n > 0 then ack (m - 1) (ack m (n - 1)) else failwith "m and n should be greater than 0" 
-    
-    
-external or': bool -> bool -> bool = "%sequor"
+
 let rec mem x l = match l with 
   | [] -> false
   | hd :: tl -> or' (x = hd) (mem x tl)
     
+
+let list_min l = 
+  let rec list_min_rec l mini = match l with
+    | [] -> mini
+    | hd :: tl -> list_min_rec tl (if hd < mini then hd else mini)
+  in match l with 
+  | [] -> failwith "try to fidn a minimal item in an empty list"
+  | hd :: tl -> list_min_rec tl hd
+        
+(* On fait le choit ici de ne pas privilégier la recurtion terminal au profit 
+d'une évaluation paresseuse de la list *)          
+let rec is_sorted l = match l with
+  | [] -> true
+  | [ _ ] -> true
+  | x :: x' :: tl -> and' (x <= x') (is_sorted (x' :: tl))
+                       
